@@ -1,14 +1,20 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
-    val name = "Kotlin"
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    println("Hello, " + name + "!")
 
-    for (i in 1..5) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        println("i = $i")
-    }
+    println("Introduce una palabra: ")
+    val palabra1: String = readln()
+
+    println("Introduce otra palabra: ")
+    val palabra2: String = readln()
+
+    println("¿Las palabras $palabra1 y $palabra2 son un anagrama? = ${anagrama(palabra1, palabra2)}")
+
+}
+
+fun anagrama(palabra1: String, palabra2: String): Boolean{
+
+    if (palabra1.reversed() == palabra2)
+        return true
+    else
+        return false
+
 }
