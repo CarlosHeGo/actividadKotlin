@@ -1,14 +1,55 @@
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
-    val name = "Kotlin"
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    println("Hello, " + name + "!")
+/*
+    {a + b [c] * (2x2)}}}}
+    { [ a * ( c + d ) ] - 5 }
+    { a * ( c + d ) ] - 5 }
+    {a^4 + (((ax4)}
+    { ] a * ( c + d ) + ( 2 - 3 )[ - 5 }
+    {{{{{{(}}}}}}
+    (a
 
-    for (i in 1..5) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        println("i = $i")
+ */
+
+    println("Introduce una expresión: ")
+    val expresion: String = readln()
+    println("$expresion ¿está balanceada? ${estaBalanceada(expresion)}")
+}
+
+fun estaBalanceada(expresion: String): Boolean{
+
+    val expresionDescompuesta = expresion.toCharArray()
+    var delimitadoresApertura: MutableList<Char> = mutableListOf()
+    var delimitadoresCierre: MutableList<Char> = mutableListOf()
+
+    for (item in expresionDescompuesta){
+
+        if (item == '(' || item == '{' || item == '[')
+            delimitadoresApertura.add(item)
+        else if (item == ')' || item == '}' || item == ']')
+            delimitadoresCierre.add(item)
+
     }
+
+
+    val delimitCierreReverso = delimitadoresCierre.reversed()
+
+    if (delimitadoresCierre.size == delimitadoresApertura.size){
+        var balanceado: Boolean = false
+        var posicion: Int = 0
+        while (posicion < delimitadoresCierre.size && !balanceado){
+            println(delimitadoresApertura)
+            println(delimitCierreReverso)
+            if ((delimitadoresApertura[posicion] == '(' && delimitCierreReverso[posicion] == ')')
+                || (delimitadoresApertura[posicion] == '{' && delimitCierreReverso[posicion] == '}')
+                || (delimitadoresApertura[posicion] == '[' && delimitCierreReverso[posicion] == ']'))
+                balanceado = true
+            else balanceado = false
+            posicion++
+        }
+        if (balanceado)
+            return true
+    }
+    return false
 }
