@@ -19,37 +19,31 @@ fun main() {
 
 fun estaBalanceada(expresion: String): Boolean{
 
-    val expresionDescompuesta = expresion.toCharArray()
-    var delimitadoresApertura: MutableList<Char> = mutableListOf()
-    var delimitadoresCierre: MutableList<Char> = mutableListOf()
-
-    for (item in expresionDescompuesta){
-
-        if (item == '(' || item == '{' || item == '[')
-            delimitadoresApertura.add(item)
-        else if (item == ')' || item == '}' || item == ']')
-            delimitadoresCierre.add(item)
-
-    }
+    var listaDelimitadores: MutableList<Char> = mutableListOf()
+    var delimitadoresApertura: Array<Char> = arrayOf('(','{','[')
+    var delimitadoresCierre: Array<Char> = arrayOf('(','{','[')
+    var balanceada: Boolean
 
 
-    val delimitCierreReverso = delimitadoresCierre.reversed()
+    for (item in expresion){
 
-    if (delimitadoresCierre.size == delimitadoresApertura.size){
-        var balanceado: Boolean = false
-        var posicion: Int = 0
-        while (posicion < delimitadoresCierre.size && !balanceado){
-            println(delimitadoresApertura)
-            println(delimitCierreReverso)
-            if ((delimitadoresApertura[posicion] == '(' && delimitCierreReverso[posicion] == ')')
-                || (delimitadoresApertura[posicion] == '{' && delimitCierreReverso[posicion] == '}')
-                || (delimitadoresApertura[posicion] == '[' && delimitCierreReverso[posicion] == ']'))
-                balanceado = true
-            else balanceado = false
-            posicion++
+        if (item in delimitadoresApertura){
+            listaDelimitadores.add(item)
+
+        } else if (item in delimitadoresCierre){
+            println(item)
+            if (listaDelimitadores.size>0 &&   listaDelimitadores.last() == delimitadoresApertura[delimitadoresCierre.indexOf(item)]){
+                listaDelimitadores.removeLast()
+            } else if (listaDelimitadores.none()){
+                balanceada = false
+            } else
+                balanceada = true
+
         }
-        if (balanceado)
-            return true
+
     }
-    return false
+    if(balanceada)
+        return true
+    else
+        return false
 }
