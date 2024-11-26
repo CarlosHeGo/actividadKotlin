@@ -21,8 +21,8 @@ fun estaBalanceada(expresion: String): Boolean{
 
     var listaDelimitadores: MutableList<Char> = mutableListOf()
     var delimitadoresApertura: Array<Char> = arrayOf('(','{','[')
-    var delimitadoresCierre: Array<Char> = arrayOf('(','{','[')
-    var balanceada: Boolean
+    var delimitadoresCierre: Array<Char> = arrayOf(')','}',']')
+    var balanceada: Boolean = true
 
 
     for (item in expresion){
@@ -31,18 +31,14 @@ fun estaBalanceada(expresion: String): Boolean{
             listaDelimitadores.add(item)
 
         } else if (item in delimitadoresCierre){
-            println(item)
             if (listaDelimitadores.size>0 &&   listaDelimitadores.last() == delimitadoresApertura[delimitadoresCierre.indexOf(item)]){
                 listaDelimitadores.removeLast()
-            } else if (listaDelimitadores.none()){
-                balanceada = false
             } else
-                balanceada = true
-
+                balanceada = false
         }
 
     }
-    if(balanceada)
+    if(balanceada && listaDelimitadores.size==0)
         return true
     else
         return false
