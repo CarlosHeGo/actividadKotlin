@@ -21,8 +21,8 @@ fun main() {
     println(carrera(accion1,pista1))
     println(carrera(accion2,pista2))
     println(carrera(accion3,pista3))
-    carrera(accion4,pista4)
-    carrera(accion5,pista5)
+    println(carrera(accion4,pista4))
+    println(carrera(accion5,pista5))
     println(carrera(accion6,pista6))
     println(carrera(accion7,pista7))
     println(carrera(accion8,pista8))
@@ -33,7 +33,15 @@ fun carrera(accion: Array<String>, pista: String ): Boolean{
 
     var posicion: Int = 0
     var superada: Boolean = true
+
     for (superficie in pista){
+        if(posicion>=accion.size){
+            print('?')
+            superada = false
+            continue
+        }
+
+
         if ((accion[posicion] == "correr" && superficie == '_') || (accion[posicion] == "saltar" && superficie == '|')){
             print(superficie)
         } else if (accion[posicion] == "saltar" && superficie == '_'){
@@ -47,6 +55,13 @@ fun carrera(accion: Array<String>, pista: String ): Boolean{
             superada = false
         }
         posicion++
+
     }
+    while(posicion<accion.size){
+        print('?')
+        superada = false
+        posicion++
+    }
+
     return superada
 }
