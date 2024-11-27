@@ -1,4 +1,5 @@
 import kotlin.Array
+import kotlin.collections.indices
 
 fun main() {
 
@@ -22,6 +23,14 @@ fun tresEnRaya(juego: Array<Array<String>>): String{
     var numO: Int = 0
 
     for (fila in juego){
+
+        for (fila in juego.indices){
+            for (columna in juego[fila].indices){
+                if(juego[fila][columna] == "X"){
+                    
+                }
+            }
+        }
 
         for(posicion in fila){
 
