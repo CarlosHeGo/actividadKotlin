@@ -1,14 +1,56 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-fun main() {
-    val name = "Kotlin"
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    println("Hello, " + name + "!")
+import kotlin.Array
 
-    for (i in 1..5) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        println("i = $i")
+fun main() {
+
+    var juego1: Array<Array<String>> = arrayOf(arrayOf("X","O","X"),arrayOf("O", "X", "O"),arrayOf("O", "O", "X"))
+    var juego2: Array<Array<String>> = arrayOf(arrayOf("","O","X"),arrayOf("", "X", "O"),arrayOf("", "O", "X"))
+    var juego3: Array<Array<String>> = arrayOf(arrayOf("O","O","O"),arrayOf("O", "X", "X"),arrayOf("O", "X", "X"))
+    var juego4: Array<Array<String>> = arrayOf(arrayOf("X","O","X"),arrayOf("X", "X", "O"),arrayOf("X", "X", "X"))
+
+    println(tresEnRaya(juego1))
+    println(tresEnRaya(juego2))
+    println(tresEnRaya(juego3))
+    println(tresEnRaya(juego4))
+}
+
+fun tresEnRaya(juego: Array<Array<String>>): String{
+
+    var resultado: String = ""
+    var contadorX: Int = 0
+    var contadorO: Int = 0
+    var numX: Int = 0
+    var numO: Int = 0
+
+    for (fila in juego){
+
+        for(posicion in fila){
+
+            if(posicion.equals("X"))
+                contadorX++
+
+            if(posicion.equals("O"))
+                contadorO++
+
+            if(posicion.equals(""))
+                resultado = "EMPATE"
+
+        }
     }
+
+    if(contadorX+contadorO == 9){
+        if(contadorO == contadorX+1 || contadorX == contadorO+1){
+            for (fila in juego) {
+                while(fila.equals("X")){
+                    numX++
+                    if(numX==3){
+                        println("gana¿")
+                    }
+
+                }
+            }
+        }
+        else
+            resultado = "NULL"
+    }
+    return resultado
 }
