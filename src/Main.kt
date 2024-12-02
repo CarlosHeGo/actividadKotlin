@@ -6,7 +6,7 @@ fun main() {
     var contacto1 = Contacto("Pedro",987654321)
     var contacto2 = Contacto("Paula",912345678)
     var contacto3 = Contacto("Sonia",987123456)
-    var listadoContactos: MutableList<Contacto> = mutableListOf(contacto1)
+    var listadoContactos: MutableList<Contacto> = mutableListOf(contacto1,contacto2)
     var opcion: Int = 0
 
     while (opcion != 8){
@@ -41,6 +41,7 @@ fun menuPrincipal() {
 }
 
 fun opcion1 (listadoContactos: MutableList<Contacto>){
+    var encontrado: Boolean = false
     println("Escribe un nombre")
     var nombre: String = readln()
 
@@ -49,13 +50,15 @@ fun opcion1 (listadoContactos: MutableList<Contacto>){
 
     val nuevoContacto= Contacto(nombre,tlf)
 
-    for (contacto in listadoContactos){
-        if (contacto.nombre.equals(nombre)){
+    for (contactos in listadoContactos){
+        if (contactos.nombre == nuevoContacto.nombre){
             println("El contacto con ese nombre ya existe")
-        } else {
-            listadoContactos.add(nuevoContacto)
-            println("Se ha añadido el contacto")
-            }
+            encontrado = true
+        }
+    }
+    if (!encontrado){
+        listadoContactos.add(nuevoContacto)
+        println("Se ha añadido el contacto")
     }
 }
 
@@ -71,20 +74,28 @@ fun opcion2 (listadoContactos: MutableList<Contacto>){
 }
 
 fun opcion3 (listadoContactos: MutableList<Contacto>){
+    var encontrado: Boolean = false
+
     println("Escribe un nombre")
     var nombre: String = readln()
 
     for (contacto in listadoContactos){
         if (contacto.nombre.equals(nombre)){
             println("Su telefono es ${contacto.telefono}")
-        } else
-            println("No se ha encontrado el contacto")
+            encontrado = true
+        }
+
+    }
+
+    if (!encontrado){
+        println("No se ha encontrado el contacto")
     }
 
 
 }
 
 fun opcion4 (listadoContactos: MutableList<Contacto>){
+    var encontrado: Boolean = false
     println("Escribe un nombre")
     var nombre: String = readln()
     if (listadoContactos.isEmpty()){
@@ -93,24 +104,39 @@ fun opcion4 (listadoContactos: MutableList<Contacto>){
     for (contacto in listadoContactos){
         if (contacto.nombre == nombre){
             println("Existe contacto")
-        } else
-            println("No existe contacto")
+            encontrado = true
+        }
+    }
+    if (!encontrado){
+        println("No existe contacto")
     }
 }
 
 fun opcion5 (listadoContactos: MutableList<Contacto>){
+    var encontrado: Boolean = false
     println("Escribe un nombre")
     var nombre: String = readln()
     for (contacto in listadoContactos){
         if (contacto.nombre == nombre){
             listadoContactos.remove(contacto)
+            encontrado = true
             println("Se ha eliminado el contacto")
-        } else
-            println("No se ha eliminado el contacto")
+        }
+    }
+
+    if (!encontrado){
+        println("No se ha eliminado el contacto")
     }
 }
 
 fun opcion6 (listadoContactos: MutableList<Contacto>){
+    var numContactos = listadoContactos.size
+    for (contactos in listadoContactos){
+        numContactos--
+    }
+    if (numContactos>=0){
+        println("Hay $numContactos contacto/s libre/s")
+    }
 
 }
 
